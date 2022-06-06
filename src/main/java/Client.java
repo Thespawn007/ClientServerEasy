@@ -7,26 +7,27 @@ public class Client {
         System.out.println("Welcome to Client side");
 
         Socket fromserver = null;
-
-        if (args.length==0) {
-            System.out.println("use: client hostname");
-            System.exit(-1);
+        String  hostname;
+        if (args.length == 0) {
+            hostname = "localhost";
+            System.out.println("Hostname given by default: localhost");
+//            System.exit(-1);
         }
+        else  hostname = args[0];
 
-        System.out.println("Connecting to... "+args[0]);
-
-        fromserver = new Socket(args[0],4444);
-        BufferedReader in  = new
+        System.out.println("Connecting to... " + hostname + "\n");
+        fromserver = new Socket(hostname, 4444);
+        BufferedReader in = new
                 BufferedReader(new
                 InputStreamReader(fromserver.getInputStream()));
-        PrintWriter    out = new
-                PrintWriter(fromserver.getOutputStream(),true);
+        PrintWriter out = new
+                PrintWriter(fromserver.getOutputStream(), true);
         BufferedReader inu = new
                 BufferedReader(new InputStreamReader(System.in));
 
-        String fuser,fserver;
+        String fuser, fserver;
 
-        while ((fuser = inu.readLine())!=null) {
+        while ((fuser = inu.readLine()) != null) {
             out.println(fuser);
             fserver = in.readLine();
             System.out.println(fserver);

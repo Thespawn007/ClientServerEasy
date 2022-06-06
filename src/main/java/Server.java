@@ -33,11 +33,15 @@ public class Server {
         out = new PrintWriter(fromclient.getOutputStream(),true);
         String         input,output;
 
-        System.out.println("Wait for messages");
+        System.out.println("Wait for messages\n");
         while ((input = in.readLine()) != null) {
-            if (input.equalsIgnoreCase("exit")) break;
-            out.println("S ::: "+input);
-            System.out.println(input);
+            System.out.println("Client: " + input);
+            if (input.equalsIgnoreCase("exit") || input.equalsIgnoreCase("close")) {
+                out.println("Server: Server shutdown");
+                break;
+            }
+            out.println("Server: "+input);
+
         }
         out.close();
         in.close();
